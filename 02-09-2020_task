@@ -1,0 +1,17 @@
+var fs=require('fs');
+
+var data=fs.readFile('a1.txt',function(err,data){
+if(err)
+return err
+
+console.log(data.toString());
+});
+
+
+console.log('program ended');
+
+how to get the err and print in console in the abv prog
+
+2. how to count number of listeners associated with a particular event?
+
+3. how to append a file  by using flag 'a'
