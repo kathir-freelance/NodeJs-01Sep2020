@@ -1,0 +1,29 @@
+const fs = require('fs'),
+file = './file.txt';
+
+fs.open(file, 'w+', (err, fd) => {
+ let buf = Buffer.from('write this line');
+});
+
+check whther above code will write to file or complete the code if not
+
+
+const fs = require('fs'),
+path = 'a.txt'
+
+const stat = fs.statSync(path)
+console.log(stat.size);
+
+console.log(__dirname);
+console.log(__filename);
+
+const func=(str)=>{
+	console.log(str);
+}
+func('jjjj');
+
+
+setTimeout(func('jjj'),2000);
+//setInterval(func('jjj'),2000);
+
+error in callback - resolve it
