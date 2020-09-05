@@ -1,0 +1,33 @@
+STEP 1: create a proj
+	create a module file which contains ur logic
+
+	mymodule.js
+
+	
+exports.myobj={'name':'ajay','age':30};
+
+
+exports.hello=function(){
+
+console.log('this is a module ');
+}
+
+exports.home=()=> console.log('this is arrow function');
+
+Then 
+	create a packages.json file in tht folder - using npm init
+
+then open the folder in cmd prompt and give npm pack
+	
+In module project, execute npm pack:
+This will build a <package-name>-<version>.tgz file.
+
+Step 2:
+	create a new proj 
+	create a packages.json file and add beloe snippet
+
+"dependencies": {
+  "my-package-name": "path/to/my-package-name-1.3.3.tgz"
+}
+STEP 4: Install the packages:
+npm install or npm i or yarn

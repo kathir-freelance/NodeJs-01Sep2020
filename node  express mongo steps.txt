@@ -1,0 +1,173 @@
+node express mongo
+
+npm init
+
+echo >server.js
+
+Using Express
+
+npm install express --save
+
+
+We need to create a server that browsers can connect to. We do this by using the Express’s listen method.
+
+app.listen(3000, function() {
+  console.log('listening on 3000')
+})
+
+
+
+Now, run node server.js and navigate to localhost:3000
+
+displays error in browser as "cannot /GET"
+
+In Express, we handle a GET request with the get method:
+
+app.get(endpoint, callback)
+
+so we add in server.js as below
+
+app.get('/', function (req, res) {
+  // do something here
+})
+
+or in es6 
+
+app.get('/', (req, res) => {
+  res.send('Hello World')
+})
+
+now check by using 
+
+localhost:3000/
+
+prints output 'hi hello' in console and in browser
+
+now we need a home page for the app
+
+ie add index.html
+
+create it by using below command:
+
+echo <h1> hi hello </h1> > index.html
+
+NODEMON:
+----------
+
+when any chnage is mad to our file, need to refresh output being displayed, we can do it by using "nodemon"
+
+	Nodemon restarts the server automatically when you save a file that’s used by the server.js. 
+
+Install it using below command
+
+	npm install nodemon --save-dev
+========================================================================================================
+NOTE:
+	Nodemod behaves like Node
+========================================================================================================
+
+run it using below cmd
+
+	nodemon server.js -chnages are not live reloading 
+
+	instal nodemon using -g while installing
+
+now run using below cmd
+
+	nodemon run server.js
+
+CRUD :
+=======
+
+create :
+
+	<form action="/save" method="POST">
+	  <input type="text" placeholder="name" name="name"><br/>
+	  <input type="text" placeholder="quote" name="quote"><br/>
+	  <button type="submit">Submit</button>
+	</form>
+
+in server.js, add code to handle post call
+
+app.post('/save', (req, res) => {
+  console.log('hiiii!')
+})
+
+
+how do we get the input values with Express?
+
+Body-parser :
+-------------
+	* Body-parser is a third-party middleware. 
+	* They help to tidy up the request object before we use them.
+	
+install body-parser using below cmd
+
+	npm install body-parser --save
+
+Then add  below snippet,for body-parser to get values:
+
+	const bodyParser= require('body-parser')
+
+	add it 	body parser above get,post calls
+
+		app.use(bodyParser.urlencoded({ extended: true }))
+
+
+urlencoded :
+------------
+
+	urlencoded method within body-parser tells body-parser to extract data from the <form> element and add them to the body property in the request object.
+
+change code in app.post as below
+
+	app.post('/quotes', (req, res) => {
+	  console.log(req.body)
+	})
+
+
+next step is to store the info into db
+
+install dependencies for mongo db in node
+
+we also use Mongoose (which is a framework for MongoDB) 
+
+Mongoose :
+	Mongoose is a library that makes MongoDB easier to use.
+	Its used for ,
+
+		* It gives structure to MongoDB Collections
+		* It gives you helpful methods to use
+
+Then install mongodb depedencies,
+
+	npm install mongodb --save
+
+Once installed, we can connect to MongoDB through the MongoClient's connect method as below
+
+	const MongoClient = require('mongodb').MongoClient
+
+any deprecation error comes, add "{ useUnifiedTopology: true} " in connect method
+
+MongoClient.connect(connectionString, { useUnifiedTopology: true },(err, client) => {
+  if (err) return console.error(err)
+  console.log('Connected to Database')
+})
+
+in the meanwhile, create db and collection, 
+
+change in the driver url
+
+then add below code into serer.js
+
+    const quotesCollection = db.collection('quotes')
+
+then this will not store in cloud db , untill u whitelist in atlas mongo
+
+then run the code, check in cloud db whether data is stored, select collecions and check, if data is persisted.
+
+finally, res.redirect('/');
+
+
+
+	

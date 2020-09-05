@@ -1,0 +1,5 @@
+https://codeburst.io/writing-a-crud-app-with-node-js-and-mongodb-e0827cbbdafb
+
+https://zellwk.com/blog/crud-express-mongodb/
+
+https://dev.to/beznet/build-a-rest-api-with-node-express-mongodb-4ho4

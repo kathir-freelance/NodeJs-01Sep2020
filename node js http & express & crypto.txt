@@ -1,0 +1,129 @@
+duplex streams
+Node js http & express & crypto
+================================
+
+A web server receives HTTP requests from a client, like your browser, and provides an HTTP response, like an HTML page or JSON from an API.
+
+
+Why we use node to create a server side coding?
+
+Node.js allows developers to use JavaScript to write back-end code, even though traditionally it was used in the browser to write front-end code. Having both the frontend and backend together like this reduces the effort it takes to make a web server, which is a major reason why Node.js is a popular choice for writing back-end code.
+
+
+md my-http-server
+cd my-http-server
+
+echo > server.js
+
+in server.js
+
+const cities = require('cities'); //3rd party plugin
+console.log(cities);
+const url = require('url');
+const http = require('http');
+const app = http.createServer((request, response) => {
+  var city, query;
+  query = url.parse(request.url, true).query;
+  if (query.zipCode) city = cities.zip_lookup(query.zipCode).city;
+  else city = "not found"
+  response.writeHead(200, {"Content-Type": "text/html"});
+  response.write(`<h1>The city you are in is ${city}.</h1>`);
+  response.end();
+});
+
+app.listen(3000);
+
+
+or
+
+with event emitters:
+
+var http = require('http');
+
+//The url we want is: 'www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'
+var options = {
+  host: 'www.random.org',
+  path: '/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'
+};
+
+callback = function(response) {
+  var str = '';
+
+  //another chunk of data has been received, so append it to `str`
+  response.on('data', function (chunk) {
+    str += chunk;
+  });
+
+  //the whole response has been received, so we just print it out here
+  response.on('end', function () {
+    console.log(str);
+  });
+}
+
+http.request(options, callback).end();
+
+url module:
+=============
+var http=require('http');
+var url = require('url');
+
+var server=http.createServer((req,resp)=>{
+
+//	console.log(req);
+	console.log(req.method);
+	var q=url.parse(req.url).query;
+	console.log(q);
+});
+
+server.listen(3000);
+
+
+By passing true as the second parameter (parseQueryString), you get an additional "query" key that contains the parsed query string. 
+
+use q.pathname===?
+
+console.log(q.host);
+
+console.log(q.search);
+
+we need to process differently for different endpoints then
+==============================================================
+const server = http.createServer((req, res) => {
+    if (req.url === '/') {
+        res.write('<h1>Hello, Node.js!</h1>');
+    }
+	if (req.url === '/hi') {
+        res.write('<h1>Hi, Node.js!</h1>');
+    }
+    res.end();
+});
+
+
+or
+
+create 2 html files -> a.html and b.html
+
+var http = require('http');
+var url = require('url');
+var fs = require('fs');
+
+http.createServer(function (req, res) {
+  var q = url.parse(req.url, true);
+  var filename = "." + q.pathname;
+  fs.readFile(filename, function(err, data) {
+    if (err) {
+      res.writeHead(404, {'Content-Type': 'text/html'});
+      return res.end("404 Not Found");
+    } 
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(data);
+    return res.end();
+  });
+}).listen(8080);
+
+extra Read: http://book.mixu.net/node/ch10.html
+
+
+express:
+
+

@@ -1,0 +1,5 @@
+https://www.brainbell.com/javascript/fs-open-read-write-file.html
+
+https://www.sohamkamani.com/blog/nodejs-file-system-guide/#working-with-file-streams
+
+https://www.freecodecamp.org/news/do-you-want-a-better-understanding-of-buffer-in-node-js-check-this-out-2e29de2968e8/

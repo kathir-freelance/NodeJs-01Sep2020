@@ -1,0 +1,731 @@
+Node Js Training
+
+9:30 Am to 11:30 Am
+
+waiting for few more  to join
+
+kathiresan.natarajan@atos.net
+
+
+For any queries related to Assessment , pls connect with
+
+fredrick-alphonse-raj.jayakumar@atos.net / ankita.gokhale@atos.net
+
+Attendance link will be shared BY EOD
+
+For Training Contents & Demo, pls check the below GitHub URL  
+
+https://github.com/kathir-freelance/NodeJs-01Sep2020
+
+NODE JS?
+
+JS - >  only in browser -> js engine js vm->
+
+chrome - V8 engine
+firefox- spider monkey
+IE - chakra
+safari - webkit, javascriptCore
+
+
+Node js - > V8 engine + additional lib(libuv)
+
+js on the server side
+
+
+JS Runtime environment  which is built on V8 engine
+
+
+node is an event based , non blocking IO,asynchronous IO
+
+
+node is based out of event loop 
+
+
+ES6 features :
+	ES4 - completely not in use
+	ES5 - 
+	ES6 -current version / called ES2015
+
+
+let , const , arrow function
+
+let war1=90;
+
+function f1(){
+	var war1=600;
+
+	{
+	let war1=9000;
+	console.log(war1);	
+		{
+			let war1=30000;
+			console.log(war1);
+		}
+	}
+
+	console.log(war1);
+}
+function f2(){
+	console.log(war1);
+}
+
+f1();
+f2();
+
+
+
+function hello(){
+	return "hello";
+}
+
+hello=function(){
+	return "hello";
+}
+
+
+in es6
+
+	arrow fucntion
+
+hello=()=>{
+	return "hello";
+}
+
+
+
+usage of this keyword
+
+function hello(){
+	console.log(this);
+}
+
+arrowFun=()=>{
+	console.log(this);
+}
+
+
+
+created by -->RYAn DAHL
+
+DENO --> Ryan Dahl
+
+
+NVM - node version manager -> install diff version of node and manage it by nvm
+
+ switching between version
+
+cmd -> 
+
+	extn - .js
+	
+App.js
+
+	md sep_node_demo
+	cd sep_node_demo
+	echo console.log('hi');>app.js
+	
+
+NPM :
+
+node package manager - dependency management -
+
+repo- 
+npm - CLI -
+
+	start
+	pack
+	build
+	run
+	install or i
+
+in cmd-> npm ----options that can be used
+
+in dev machine itself
+
+global storage - will be visible for all the projects - C:\Users\DELL\AppData\Roaming\npm\node_modules
+local storage - specified proj alone - location - project folder
+
+
+to track the dependencies used by tht proj - maintain it by using "packages.json" 
+
+npm init 
+
+node_modules - 
+
+built-in modules
+
+	http
+	os
+	util
+	dns
+	fs
+	url
+	events
+	net
+	path
+	tty
+	vm
+	zlib
+	tls
+	timers
+	crypto
+	assert
+	buffer	
+
+user-defined modules
+
+third-party modules
+
+
+
+
+
+
+npm init - creating a packages .json file
+npm init -y or
+npm init --yes
+
+dependencies can be categorized
+
+dev dependencies
+	nginx
+	light-server
+	
+dependencies (production)
+	httpd
+
+npm pack - tgz format similiar to jar in java
+
+
+
+global dependencies :
+
+	appdata/Roaming/npm/node_modules location under username
+
+
+npm i -g dependencies
+
+
+
+user defined module- 
+
+	module - package - folder
+
+	md mymodule
+	cd mymodule
+	echo >app.js
+	npm init --yes
+
+	in app.js 
+	var myinfo={
+	var data={name:'ajay',age:28,city:'mumbai'};
+	
+	getData=function(){
+		console.log('func is called');
+	}
+	};
+
+	module.exports=myinfo;
+
+
+in page2.js
+
+	var mymod=require(./mymodule.js);
+
+
+event loop:
+
+events
+fs
+util
+global objects
+path
+http
+
+
+FIFO---
+
+console.log("hi");
+setInterval(....)
+console.log("hi");
+
+node or python is faster?
+
+events : 
+
+EventEmitter -
+
+
+File system:
+
+Read file - async
+======================
+const fs = require('fs')
+
+// fs.readFile takes the file path and the callback
+fs.readFile('a.txt', (err, data) => {
+
+	// if there's an error, log it and return
+	if (err) {
+		console.error(err)
+		return
+	}
+
+	// Print the string representation of the data
+	console.log(data.toString())
+})
+
+WriteFile - async
+==================
+
+const fs = require('fs')
+
+fs.writeFile('a.txt', 'Hello World', (err) => {
+	// If there is any error in writing to the file, return
+	if (err) {
+		console.error(err)
+		return
+	}
+
+	// Log this message if the file was written to successfully
+	console.log('wrote to file successfully')
+})
+
+
+Using an asynchronous model will make our code run much faster since we don’t need to wait for the underlying OS to complete its operations:
+
+The fs sync API, on the other hand, blocks the NodeJS process until the OS completes its task:
+
+
+	node js				OS
+	process 
+
+	   |				|
+	   |				|
+	   |				|
+	    --call os to write to file-> 	
+   	   |				|
+	   |				|
+	waiting			   writing file
+	   |				|
+	   |				|
+	   |				|
+	    <----done - writing file----
+	   |				|
+	   |				|
+	   |				|
+	resume execution
+	   |				|
+
+sync read or write:
+=======================
+
+const fs = require('fs')
+
+// The writeFileSync API takes the location of the file, and the contents to be written to it
+fs.writeFileSync('a.txt', 'Hello Sync API!')
+
+// The readFileSync API reads the file and returns a Buffer, then call `toString` method get the string
+
+
+console.log(fs.readFileSync('a.txt').toString())	   		
+or
+console.log(data.toString('utf8'));
+
+
+var fs = require("fs");
+var fileName = "a.txt";
+
+fs.exists(fileName, function(exists) {
+  if (exists) {
+    fs.stat(fileName, function(error, stats) {
+      fs.open(fileName, "r", function(error, fd) {
+        var buffer = new Buffer(stats.size);
+
+        fs.read(fd, buffer, 0, buffer.length, null, function(error, bytesRead, buffer) {
+          var data = buffer.toString("utf8", 0, buffer.length);
+
+          console.log(data);
+          fs.close(fd);
+        });
+      });
+    });
+  }
+});
+
+watch in node js FS
+====================
+
+var fs = require("fs");
+var fileName = "foo.txt";
+
+fs.watch(fileName, {
+  persistent: true
+}, function(event, filename) {
+  console.log(event + " event occurred on " + filename);
+});
+
+
+The watch() function takes 3 args
+
+1st --> file to watch
+2nd --> optional, and provides configuration settings,named 'persistent' -> boolean value 
+
+	if true ->  prevents the program from terminating (default)
+
+3rd --> callback which is triggered when the target file is modified
+
+NOTE:
+======
+watch() is dependent on the underlying OS, and might not work on every system. If watch() is unavailable, the slower watchFile() can be used as a backup.
+
+File stats:
+=============
+
+const fs = require('fs')
+fs.stat('/Users/test.txt', (err, stats) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+
+  stats.isFile() //true
+  stats.isDirectory() //false
+  stats.isSymbolicLink() //false
+  stats.size //1024000 //= 1MB
+})
+
+
+dev :
+=====
+Device id – ID of the device containing the file. This number uniquely identifies the file device.
+
+
+const fs = require('fs'),
+path = 'a.txt'
+
+const stat = fs.statSync(path)
+console.log(stat.dev)
+//3803513792
+
+or
+
+console.log(stat['dev'])
+
+atimeMs : Access Time in Milliseconds
+mtimeMs : Modify Time in Milliseconds
+birthtimeMs : Create Time in Milliseconds
+
+
+What is a file descriptor
+=============================
+A file descriptor is a handle used to access a file. It is a non-negative integer uniquely referencing a specific file.
+
+//Print fd
+const file = './file.txt',
+fs = require('fs');
+
+fs.open(file,'w', (err,fd) => {
+ if (err){
+  console.log(err);
+ }
+ else {
+  console.log(fd);//3
+ }
+}
+
+stdin,stdout,stderr is 0,1,2 accordingly, so 3 is for open
+
+Read and write files byte by byte
+======================================
+fs.read() and fs.write()
+===========================
+
+The fs.read() and fs.write() functions share the same parameters:
+
+fd
+The fs.open() method’s callback file descriptor
+
+buffer
+The buffer used to either hold data to be written or appended, or read
+
+offset
+The offset where the input/output (I/O) operation begins in the buffer
+
+length
+The number of bytes to read or write in the buffer
+
+position
+Position in the file where to begin reading or writing.
+
+
+callback
+The callback functions have three arguments:
+	err - An error, if operation failed
+	bytes -Bytes read (or written)
+	buffer - The buffer.
+
+-------------------------------------------------------------------------------
+fs.open('path of file',(err,fd)=>{
+fs.read(
+ fd, buffer, offset, length, position, 
+  (err, bytes, buffer) => {
+})
+});
+
+//fs.write syntax
+fs.write(
+ fd, buffer, offset, length, position, 
+  (err, bytes, buffer) => {
+})
+
+---------------------------------------------------------------------------------
+we need to see what buffer is:
+
+	The Buffer class was introduced as part of the Node.js API to make it possible to manipulate or interact with streams of binary data.
+
+Binary Data? 0's and 1's
+
+to store 12 binary equiv -> 1100
+
+UTF-8 state that 12 should be in eight bits,  00001100
+then 76 is ---> 01001100
+
+Buffers are mostly used with streams
+
+Streams : movement of data
+
+the rate the data arrives is faster than the rate the process consumes the data, the excess data need to wait somewhere for its turn to be processed.
+
+On the other hand, if the process is consuming the data faster than it arrives, the few data that arrive earlier need to wait for a certain amount of data to arrive before being sent out for processing.
+
+that waiting area is called as "Buffer" - fastens the process (in RAM)
+
+create a buffer:
+==================
+const buf1 = Buffer.alloc(10);
+const buf = Buffer.from('Hey!')
+const buf = Buffer.allocUnsafe(1024) ///not recommended
+
+ buf4=new Buffer(8);
+<Buffer 00 00 00 00 00 00 00 00>
+> (node:32928) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+
+
+const buf = Buffer.from('Hey!')
+console.log(buf[0]) //72
+console.log(buf[1]) //101
+
+console.log(buf.toString())
+
+console.log(buf.length)
+
+iterate over the content in buffer:
+=============================
+const buf = Buffer.from('Hey!')
+for (const item of buf) {
+  console.log(item) //72 101 121 33
+}
+
+write to buffer:
+=================
+const buf = Buffer.alloc(4)
+buf.write('Hey!')
+
+const buf = Buffer.from('Hey!')
+buf[1] = 111 //o
+console.log(buf.toString()) //Hoy!
+
+copy buffer:
+================
+const buf = Buffer.from('Hey!')
+let bufcopy = Buffer.alloc(8) //allocate 8 bytes
+buf.copy(bufcopy)
+
+
+const buf = Buffer.from('Hey!')
+let bufcopy = Buffer.alloc(2) //allocate 2 bytes
+buf.copy(bufcopy, 0, 2, 2)
+bufcopy.toString() //'He'
+
+slice buffer
+================
+const buf = Buffer.from('Hey!')
+buf.slice(0).toString() //Hey!
+const slice = buf.slice(0, 2)
+console.log(slice.toString()) //He
+buf[1] = 111 //o
+console.log(slice.toString())
+
+
+toJson method:
+const buf = Buffer.alloc(8);
+buf.toJSON()
+
+const buf = Buffer.from('Hey!')
+buf.toJSON()
+
+// the toJSON() method presents the data as the Unicode Code Points of the characters
+
+//decoding of buffer is also done by toString
+
+
+
+
+extra read :https://medium.com/better-programming/an-introduction-to-buffer-in-node-js-2237a9bce9da
+
+
+const fs = require('fs'),
+len = 26,
+buff = Buffer.alloc(len),
+pos = 0, offset =0,
+file = './a.txt';
+
+fs.open(file, 'r', (err, fd) => {
+ fs.read(fd, buff, offset, len, pos,
+ (err, bytes, buff) => { 
+  console.log(buff.toString());
+ });
+});
+
+Writing content to a file using fs.write method
+================================================
+
+const fs = require('fs'),
+file = './file.txt';
+
+fs.open(file, 'w+', (err, fd) => {
+ let buf = Buffer.from('write this line');
+});
+
+
+Streams:
+=========
+
+The Stream is an instance of the EventEmitter class, which handles events asynchronously in Node.js. 
+
+There are 4 types of streams in Node.js:
+
+Writable: Used to write data sequentially
+Readable: Used to read data sequentially
+Duplex: Used to both read and write data sequentially
+Transform: Where data can be modified when writing or reading. Take compression for an example, with a stream like this you can write compressed data and read decompressed data.
+
+
+Writable stream :
+
+const fs = require('fs');
+const file = fs.createWriteStream('file.txt');
+
+file.write('hello world');
+file.end(', from streams!');
+---------------------------------------------------------
+const fs = require('fs');
+const file = fs.createWriteStream('file.txt');
+
+for (let i = 0; i < 10000; i++) {
+    file.write('Hello world ' + i);
+}
+file.end();
+
+Readable Streams:
+====================
+
+const fs = require('fs');
+
+const readableStream = fs.createReadStream('bigfile.txt', {
+    highWaterMark: 10
+});
+
+readableStream.on('readable', () => {
+    process.stdout.write(`[${readableStream.read()}]`);
+});
+
+readableStream.on('end', () => {
+    console.log('DONE');
+});
+
+
+here highWaterMark parameter is used for chunks
+
+The default value of this parameter is 16384 bytes (16kb) so if you don't override the parameter, the stream will read 16kb chunks and pass them to you to process.
+
+Since we are using a small text file it makes more sense to use a small value for our example, so the text will be chucked by 10 characters.
+
+Duplex Streams:
+=================
+
+http server is an example
+
+Events in Readable Streams
+============================
+data: Emitted when a chunk of data is read from the stream. By default, the chunk will be a Buffer object. If you want to change it you can use the .setEncoding() method.
+error: Emitted when an error occurs during reading. This may happen if the writable stream is unable to generate data due to some internal failure or when an invalid chunk is pushed to the stream.
+end: Emitted when there is no more data in the stream.
+close: Emitted when the stream resource is closed and indicates that no more events will be emitted in the future.
+readable: Emitted when the data is available in the readable stream to read.
+
+
+Events in Writable Streams
+============================
+close: Emitted when the stream resource is closed and indicates that no more events will be emitted in the future.
+error: Emitted when an error occurs during reading. This may happen if the writable stream is unable to generate data due to some internal failure or when invalid chunk data is pushed to the stream.
+finish: Emitted when all the data has been flushed from the writable stream.
+pipe: Emitted when the writable stream is piped to a readable stream.
+unpipe: Emitted when the writable stream is un-piped from a readable stream.
+
+Transform Streams
+======================
+
+const readableStream = fs.createReadStream('file.txt');
+const transformStream = zlib.createGzip();
+const writableStream = fs.createWriteStream('file.gz');
+readableStream.pipe(transformStream).pipe(writableStream);
+
+
+Stream pipelines /Chaining the Streams
+=========================================
+
+A process similar to Piping, Chaining is used to perform multiple tasks together.
+
+var fs = require("fs");
+var zlib = require('zlib');
+// Compress the file Detox.txt to Detox.txt.gz
+fs.createReadStream(Detox.txt')
+   .pipe(zlib.createGzip())
+   .pipe(fs.createWriteStream(Detox.txt.gz'));
+console.log("File Compressed.");
+
+
+decompress
+var fs = require("fs");
+var zlib = require('zlib');
+// Decompress the file input.txt.gz to Detox.txt
+fs.createReadStream(Detox.txt.gz')
+   .pipe(zlib.createGunzip())
+   .pipe(fs.createWriteStream(Detox.txt'));
+console.log("File Decompressed.");
+
+
+pls try out with 3rd party lib - compressing
+
+
+Global objects:
+
+__dirname
+__filename
+
+setTimeout(cb,ms)
+setInterval(cb,ms)
+clearTimeout(t)
+
+
+http :
+
+	require('http');
+
+create a server to handle our req and reply back(resp) - duplex
+
+
+
+

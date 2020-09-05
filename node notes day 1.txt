@@ -1,0 +1,222 @@
+
+js
+node js - runtime environment for js
+
+
+js  - browser understands js - engine - js vm or js engine 
+
+chrome - v8
+firefox - spider monkey
+ie - chakra
+safari - webkit, javascriptCore
+
+
+Ryan dahl
+
+node js === V8 + fs + http +os +
+
+Ryan Dahl
+
+DENO - 
+
+
+
+is an event based, 
+
+non blocking 
+asynchronous I/O
+runtime environment which uses google's V8 engine + libuv library
+
+
+js versions
+
+90's ---  mosaic  
+---netscape navigator
+
+java applet
+
+js- 
+ms- JScript
+actionscript
+
+ecma international - ecma standard -
+
+es4 - abandoned
+es5 - 
+es6 - es 2015
+
+	arrow functions
+	class
+	inheritence (oops)
+	let, const - 
+	import / require
+
+Typescript - strongly typed === core js + es6 + own features +interface
+
+
+NVM - node version manager 
+nvm -v
+
+node 
+npm - node package manager
+
+npmjs.com
+npm registry
+npm cli -   npm start ,npm run, npm build, npm pack, npm link
+
+
+npm i -g lodash
+npm install -g lodash
+
+
+c:users/username/appdata (hidden folder)/npm/node_modules/ 
+
+every proj will have packages.json ---
+
+contains the depedencies needed for the project
+
+dev, productions, peer 
+
+its a JSON file
+
+devDependencies:{
+}
+
+dependencies:{}
+
+npm init
+
+npm init --yes ----> it will not prompt the dev for any info
+takes the default value
+
+if u need to assign the default value then use 
+
+	npm set init.var "value"
+ 
+
+D:\localproj>npm set init.author.email "kathiresan.natarajan@atos.com"
+
+D:\localproj>npm set init.author.name "kathiresan"
+
+D:\localproj> npm set init.license "MIT"
+
+D:\localproj>npm init --yes
+Wrote to D:\localproj\package.json:
+
+{
+  "name": "localproj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "kathiresan <kathiresan.natarajan@atos.com>",
+  "license": "MIT"
+}
+
+
+
+first pgm
+
+create a file first.js using below cmd
+
+mkdir prog
+cd prog
+echo console.log('hi') > first.js
+
+to run 
+
+cmd---> node first.js
+
+
+modify first.js for using chalk js in ur application
+
+cmd---> npm i chalk
+
+then first.js
+
+
+const chalk = require('chalk');
+const log = console.log; //global object
+ 
+// Combine styled and normal strings
+log(chalk.blue('Hello') + ' World' + chalk.red('!'));
+
+log(chalk.blue('Hello world!'));
+
+log(chalk.green(
+    'I am a green line ' +
+    chalk.blue.underline.bold('with a blue substring') +
+    ' that becomes green again!'
+));
+
+log(chalk.hex('#DEADED').bold('Bold gray!'));
+log(chalk.rgb(123, 45, 67).underline('Underlined reddish color')); 
+
+
+call back:
+
+equivalent to async
+
+
+blocking io
+
+var fs=require('fs');
+var data=fs.readFileSync('a.txt');
+console.log(data.toString());
+console.log("file is read");
+
+non blocking io
+
+var fs=require('fs');
+fs.readFile('a.txt', function(err,data){
+
+	if(err)
+		return console.log(err);
+	console.log(data.toString());	
+});
+
+	console.log("read the file");	
+
+Node applications are single threaded
+
+Node js actually makes use of events and callbacks heavily
+
+uses observer pattern
+
+	which is faster node or python ?
+
+
+libuv -----> event loop
+
+misconception- 
+
+
+buffers
+
+	memory area.
+	memory is assigned outside v8 enigine 
+	fixed sized
+	
+	array of integers where each represents a byte of data
+
+
+	developers to deal with binary data
+	buffers are deeply linked with streams
+
+	
+
+streams
+
+
+
+
+
+
+
+
+
+
+	
